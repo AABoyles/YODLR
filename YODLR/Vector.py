@@ -112,3 +112,14 @@ class Vector:
         return weight * u
     def orthogonal(self, v):
         return self - self.projection(v)
+    def cross_product(self, v):
+        if len(self) != 3 or len(v) !=3:
+            raise ValueError('Cross Products can only be computed on three-dimensional vectors!')
+        else:
+            x1, y1, z1 = self.coordinates
+            x2, y2, z2 = v.coordinates
+            return Vector(y1*z2-y2*z1, x2*z1-x1*z2, x1*y2-x2*y1)
+    def quadrangular_area_with(self, v):
+        return self.cross_product(v).magnitude()
+    def triangular_area_with(self, v):
+        return self.quadrangular_area_with(v) / 2
